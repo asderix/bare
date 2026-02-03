@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>🧊</text></svg>">
+    <link rel="stylesheet" href="./style/app.css">
+    <script type="importmap">
+        {
+            "imports": {                
+                "@BaseUiComponents": "/src/ui/base-ui-components.js",
+                "@EditableTable": "/src/ui/editable-table-ui-component.js",
+                "@Toaster": "/src/ui/toaster-ui-component.js",
+                "@Header": "/src/components/header.js",
+                "@Sidebar": "/src/components/sidebar.js",              
+                "@Architecture": "/src/components/architecture.js",          
+                "@Components": "/src/components/components.js", 
+                "@ComponentsLive": "/src/components/components-action.js", 
+                "@Sourcecode": "/src/components/sourcecode.js", 
+                "@Restrictions": "/src/components/restrictions.js", 
+                "@Dashboard": "/src/components/dashboard.js", 
+                "@Router": "/src/core/router.js",  
+                "@Utils": "/src/core/utils.js",  
+                "@Service/": "/src/service/"  
+            }
+        }
+    </script>
+    <script type="module" src="./src/bootstrap.js"></script>
+    <title>BARE - Bare App Replaces Excess</title>
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="header-left">
+            <app-btn action="toggle-sidebar" variant="icon">☰</app-btn>
+            <div style="font-weight: 800; font-size: 1.2rem; color: var(--accent);">BARE - Bare App Replaces Excess
+            </div>
+        </div>
+
+        <div class="header-center">
+            <div class="search-trigger" id="search-open">
+                <span>Search functions ...</span>
+                <kbd>Ctrl+K</kbd>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <app-btn action="not-implemented-toast" variant="icon" title="User Alerts & Informations">🔔</app-btn>
+            <app-btn action="toggle-theme" variant="icon" title="Light-/Dark-Mode">🌓</app-btn>
+            <app-btn action="show-user-information-dialog" variant="icon" title="Show the User Information Dialog">
+                <div
+                    style="width: 32px; height: 32px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer;">
+                    RF</div>
+            </app-btn>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="app-sidebar" id="sidebar" data-state="expanded">
+            <div class="sidebar-header">
+                <span class="sidebar-title">👉 </span>
+                <span class="sidebar-title" id="sidebar-title">Welcome!</span>
+            </div>
+            <nav class="sidebar-nav">
+                <app-sidebar data-items='[
+                {"label":"Dashboard","icon":"🏠","title":"Dashboard", "action":"menu-show-dashboard", "route":"dashboard"},
+                {"label":"Architecture","icon":"🏗️","title":"Architecture information", "action":"menu-show-architecture", "route":"architecture"},
+                {"label":"Components","icon":"🧩","title":"Components", "action":"menu-show-components", "route":"components"},
+                {"label":"Components in Action","icon":"🚀","title":"Test some components", "action":"menu-show-components-live", "route":"components-live/abcd123"},
+                {"label":"Sourcecode/License","icon":"📜","title":"Sourcecode & License information", "action":"menu-show-sourcecode", "route":"sourcecode"},
+                {"label":"Restrictions","icon":"⚠️","title":"Restrictions", "action":"menu-show-restrictions", "route":"restrictions"}
+                ]'></app-sidebar>
+            </nav>
+            <div class="sidebar-resizer" id="resizer"></div>
+        </aside>
+
+        <main class="app-main">
+            <section class="scroll-content">
+                <div style="max-width: 900px;">
+                    <app-content>Loading ...</app-content>
+                </div>
+            </section>
+
+            <footer class="app-footer">
+                <div>● <span style="color: oklch(70% 0.2 140);">Ready</span></div>
+                <div style="opacity: 0.6;">&copy; Ronald Fuchs | Version: 1.0.0</div>
+            </footer>
+        </main>
+    </div>
+
+    <dialog id="search-overlay" class="search-modal">
+        <div class="modal-body">
+            <input type="text" id="search-input" placeholder="Search for functions ..." autofocus>
+            <p>Not implemented in this demo.</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.5;">Press <code>Esc</code> to close</p>
+        </div>
+    </dialog>
+
+    <dialog class="user-modal" id="user-info-dialog">
+        <div class="modal-body">
+            <h2>User Information</h2>
+            <div style="margin: 10px;" id="user-details-content">
+                Not implemented in this demo.
+            </div>
+            <app-btn id="close-modal" action="close-user-information-dialog" title="Close">Close</app-btn>
+        </div>
+    </dialog>
+
+    <app-toaster></app-toaster>
+
+</body>
+
+</html>

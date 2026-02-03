@@ -1,0 +1,358 @@
+@import "./base-ui-components.css";
+@import "./toaster-ui-component.css";
+@import "./editable-table-ui-component.css";
+
+/* ================================
+   GLOBAL COLOR SYSTEM (OKLCH) 
+================================ */
+:root[data-theme="light"] {
+    --bg-base: oklch(98% 0.01 250);
+    --bg-surface: oklch(100% 0 0);
+    --bg-danger: oklch(65.0% 0.1764 15.702);
+    --bg-safe: oklch(65.0% 0.22269 147.163);
+    --text-main: oklch(25% 0.02 250);
+    --border: oklch(92% 0.01 250);
+    --accent: oklch(60% 0.16 250);
+
+    --header-h: 64px;
+    --sidebar-w: 260px;
+}
+
+:root[data-theme="dark"] {
+    --bg-base: oklch(18% 0.02 250);
+    --bg-surface: oklch(22% 0.02 250);
+    --bg-danger: oklch(63.9% 0.1764 15.702);
+    --bg-safe: oklch(64.0% 0.22269 147.163);
+    --text-main: oklch(92% 0.01 250);
+    --border: oklch(30% 0.02 250);
+    --accent: oklch(75% 0.12 250);
+
+    --header-h: 64px;
+    --sidebar-w: 260px;
+}
+
+/* ================================
+   RESET/SET
+================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline-color: var(--accent);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-main);
+
+    height: 100svh;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================================
+   HEADER
+================================ */
+.app-header {
+    height: var(--header-h);
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 1.5rem;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-trigger {
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    width: clamp(200px, 30vw, 500px);
+    color: var(--text-main);
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+.search-trigger:hover {
+    border-color: var(--accent);
+}
+
+/* ================================
+   APP CONTAINER
+================================ */
+.app-container {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+.app-sidebar {
+    width: var(--sidebar-w);
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border);
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-sidebar[data-state="rail"] {
+    --sidebar-w: 72px !important;
+}
+
+.app-sidebar[data-state="rail"] .sidebar-title,
+.app-sidebar[data-state="rail"] span {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.app-sidebar[data-state="hidden"] {
+    width: 0 !important;
+    overflow: hidden;
+    border: none;
+}
+
+.sidebar-header {
+    padding: 1.5rem 1rem 0.5rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    opacity: 0.6;
+}
+
+.sidebar-resizer {
+    position: absolute;
+    right: -4px;
+    top: 0;
+    width: 8px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 10;
+    transition: background 0.2s;
+}
+
+.sidebar-resizer:hover {
+    background: var(--accent);
+    opacity: 0.5;
+}
+
+/* ================================
+   MAIN AREA
+================================ */
+.app-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+/* ================================
+   SCROLL CONTENT
+================================ */
+.scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    background: var(--bg-base);
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+/* ================================
+   FOOTER
+================================ */
+.app-footer {
+    height: 36px;
+    flex-shrink: 0;
+
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* ================================
+   NAVIGATION
+================================ */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+
+    border-radius: 0 24px 24px 0;
+    margin-right: 0.5rem;
+
+    transition: background 0.2s;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.nav-item:hover {
+    background: var(--bg-base);
+    color: var(--accent);
+}
+
+.nav-item i {
+    font-style: normal;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* ================================
+   SEARCH-DIALOG
+================================ */
+.search-modal {
+    margin: 15vh auto;
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+
+    background: var(--bg-surface);
+    color: var(--text-main);
+    width: 600px;
+
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}
+
+.search-modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 1rem;
+
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-base);
+    color: var(--text-main);
+    font-size: 1.1rem;
+}
+
+kbd {
+    background: var(--border);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* ================================
+    USER-INFO DIALOG
+================================ */
+
+.user-modal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background: var(--bg-surface);
+    color: var(--text-main);
+    
+    width: 90vw; 
+    height: 90vh; 
+    margin: auto; 
+    
+    max-width: 1100px;
+    max-height: 800px;
+
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+.user-modal[open] {
+    opacity: 1;
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.user-modal[open]::backdrop {
+    opacity: 1;
+}
+
+/* ================================
+    MODAL DIALOG INSIDE
+================================ */
+
+.modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* ================================
+   CONTENT-HEAD
+   Quick and dirty here. Belongs
+   to the components
+================================ */
+
+.contenthead {
+    min-height: 30px;
+    margin-bottom: 15px;
+}

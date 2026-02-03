@@ -1,0 +1,127 @@
+/* ================================
+   UI ELEMENTS 
+================================ */
+.btn-default {
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    outline-color: var(--accent);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    padding: 0.6rem 1.2rem;
+    min-width: 80px;
+    border-radius: 8px;
+    
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.2;
+
+    background: oklch(from var(--bg-base) calc(l - 0.04) c h);
+    color: var(--text-main);
+    
+    box-shadow: 0 1px 3px oklch(0% 0 0 / 0.1), 
+                0 1px 2px oklch(0% 0 0 / 0.06);
+    
+    transition: 
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s active;
+
+    &.like-safe {
+        background: var(--bg-safe);
+        box-shadow: 0 2px 4px oklch(from var(--bg-safe) calc(l - 0.2) c h / 0.3);
+    }
+
+    &.like-safe:hover {
+        background: oklch(from var(--bg-safe) calc(l - 0.08) c h);
+        box-shadow: 0 4px 8px oklch(from var(--bg-safe) calc(l - 0.2) c h / 0.4);
+    }
+
+    &.like-safe:active {
+        background: oklch(from var(--bg-safe) calc(l - 0.15) c h);
+        transform: translateY(1px) scale(0.98);
+    }
+
+    &.like-danger {
+        background: var(--bg-danger);
+        color: white;
+        box-shadow: 0 2px 4px oklch(from var(--bg-danger) calc(l - 0.2) c h / 0.3);
+    }
+
+    &.like-danger:hover {
+        background: oklch(from var(--bg-danger) calc(l - 0.08) c h);
+        box-shadow: 0 4px 8px oklch(from var(--bg-danger) calc(l - 0.2) c h / 0.4);
+    }
+
+    &.like-danger:active {
+        background: oklch(from var(--bg-danger) calc(l - 0.15) c h);
+        transform: translateY(1px) scale(0.98);
+    }
+}
+
+.btn-default:hover {
+    background: oklch(from var(--bg-base) calc(l - 0.07) c h);
+    box-shadow: 0 4px 6px -1px oklch(0% 0 0 / 0.15), 
+                0 2px 4px -1px oklch(0% 0 0 / 0.1);
+}
+
+.btn-default:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.btn-default:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 1px 2px oklch(0% 0 0 / 0.1);
+    background: oklch(from var(--bg-base) calc(l - 0.1) c h);
+}
+
+btn-default button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-main);
+    padding: 0.5rem;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.btn-icon:hover {
+    background: var(--bg-base);
+}
+
+btn-icon button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

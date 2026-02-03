@@ -1,0 +1,77 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-surface);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    margin-bottom: 2rem;
+}
+
+thead {
+    background: oklch(from var(--bg-surface) calc(l - 0.08) c h);
+}
+
+th {
+    text-align: left;
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
+    opacity: 0.8;
+    border-bottom: 2px solid var(--border);
+}
+
+td {
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    transition: background 0.2s;
+}
+
+tr {
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: oklch(from var(--bg-base) l c h / 0.5);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    border: 2px solid var(--accent);
+    background: var(--bg-base);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.text-display {
+    display: block;
+    font-size: 0.95rem;
+    min-height: 1.5rem;
+    line-height: 1.5;
+}
+
+td:last-child {
+    text-align: right;
+    width: 1%;
+    white-space: nowrap;
+}
+
+.actions-td {
+    display: inline-flex; 
+    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
+    vertical-align: middle;
+}
