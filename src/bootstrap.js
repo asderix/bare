@@ -11,6 +11,8 @@ import "@ComponentsLive";
 import "@Sourcecode";
 import "@Restrictions";
 import "@Utils";
+import "@I18n";
+import "@Sw";
 import "@Service/data-service.js";
 import "@Service/message-service.js";
 
@@ -33,6 +35,14 @@ const routes = {
 const router = new Router(routes, 'app-content');
 
 window.appRouter = router;
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        window.location.reload();
+    });
+
+    navigator.serviceWorker.register('/src/sw.js');
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     initHeader();

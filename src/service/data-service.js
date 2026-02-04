@@ -22,7 +22,7 @@ export class DataService {
 
             } catch (error) {
                 this.isLoaded = false;
-                showToast("Error while loading the data!", "error");
+                showToast("i18n:[data_load_error]", "error");
                 return [];
             }
         }

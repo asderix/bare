@@ -18,7 +18,7 @@ document.addEventListener('app-action', (e) => {
             toggleTheme();
             break;
         case 'not-implemented-toast':
-            showToast("Sorry, function not implemented in this demo!", "error")
+            showToast("i18n:[not_implemented]!", "error")
             break;
         case 'show-user-information-dialog':
             const dialogShow = document.querySelector('.user-modal');

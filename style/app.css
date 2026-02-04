@@ -348,11 +348,39 @@ kbd {
 
 /* ================================
    CONTENT-HEAD
-   Quick and dirty here. Belongs
-   to the components
+   Quick and dirty here.
+   Belongs    to the components.
+   Didn't want a css file for each
+   demo component.
 ================================ */
 
 .contenthead {
     min-height: 30px;
     margin-bottom: 15px;
+}
+
+/* ================================
+   USE-PROFILE-OPTIONS
+   Quick and dirty here.
+   Create a component for the user
+   info dialog with sep. css.
+================================ */
+.user-options-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-family: sans-serif;
+    border-bottom: 1px solid #eee;
+}
+
+.user-options {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.separator {
+    color: #ccc;
+    user-select: none;
 }

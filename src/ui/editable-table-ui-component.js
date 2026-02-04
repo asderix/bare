@@ -24,7 +24,7 @@ export class EditableTable extends HTMLElement {
                 </thead>
                 <tbody id="table-body"></tbody>
             </table>
-            <app-btn id="add-record-to-table" variant="safe">Add Record</app-btn>
+            <app-btn id="add-record-to-table" variant="safe" title="i18n:[add_record_title]" data-i18n-d="i18n:[add_record]">Add Record</app-btn>
         `;
 
         const tbody = this.querySelector('#table-body');
@@ -49,14 +49,14 @@ export class EditableTable extends HTMLElement {
             if (isEditing) {
                 tr.innerHTML = `
                     <td><input type="text" class="edit-input" value="${sanitize(item.text)}" autofocus></td> 
-                    <td><app-btn variant="safe" class="save-btn">Save</app-btn></td>
+                    <td><app-btn variant="safe" class="save-btn" title="i18n:[save_entry_title]" data-i18n-d="i18n:[save]">Save</app-btn></td>
                 `;
 
                 tr.querySelector('.save-btn').onclick = () => {
                     item.text = tr.querySelector('.edit-input').value;
                     isEditing = false;
                     updateRowContent();
-                    showToast("Record successful updated.", "success");
+                    showToast("i18n:[data_success_updated].", "success");
                 };
 
                 const input = tr.querySelector('.edit-input');
@@ -69,8 +69,11 @@ export class EditableTable extends HTMLElement {
             } else {
                 tr.innerHTML = `
                     <td><span class="text-display">${sanitize(item.text)}</span></td>
-                    <td><div class="actions-td">
-                        <app-btn class="edit-btn">Change</app-btn><app-btn variant="danger" class="del-btn">Delete</app-btn></div>
+                    <td>
+                        <div class="actions-td">
+                            <app-btn class="edit-btn" title="i18n:[save_change_title]" data-i18n-d="i18n:[change]">Change</app-btn>
+                            <app-btn class="del-btn" variant="danger" title="i18n:[save_delete_title]" data-i18n-d="i18n:[delete]">Delete</app-btn>
+                        </div>
                     </td>                    
                 `;
 
@@ -83,7 +86,7 @@ export class EditableTable extends HTMLElement {
                     const index = this.data.indexOf(item);
                     this.data.splice(index, 1);
                     tr.remove();
-                    showToast("Record successful removed.", "info");
+                    showToast("i18n:[data_success_removed].", "info");
                 };
             }
         };

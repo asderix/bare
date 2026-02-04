@@ -1,3 +1,5 @@
+import { i18nParse, isInit } from "@I18n"
+
 let sidebar = null;
 let sidebarTitle = null;
 let resizer = null;
@@ -44,9 +46,9 @@ export class SidebarItem extends HTMLElement {
   }
 
   render() {
-    const label = this.textContent;
+    const label = i18nParse(this.textContent);
     const icon = this.getAttribute('icon') || '🏠';
-    const title = this.getAttribute('title') || '';
+    const title = i18nParse(this.getAttribute('title') || '');
     const action = this.getAttribute('action') || '';
     const route = this.getAttribute('route') || '';
 
@@ -79,17 +81,12 @@ export class SidebarItems extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.hasAttribute('data-src')) {
-      this.render(this.loadMenuSrc(this.getAttribute('data-src')));
-      return;
+    const items = this.hasAttribute('data-src') ? this.loadMenuSrc(this.getAttribute('data-src')) : this.loadMenuData(this.getAttribute('data-items') || "[]");
+    if (isInit) {
+      this.render(items);
     }
 
-    if (this.hasAttribute('data-items')) {
-      this.render(this.loadMenuData(this.getAttribute('data-items')));
-      return;
-    }
-
-    this.render();
+    document.addEventListener('app-i18n-ready', () => this.render(items));
   }
 
   render(items = []) {
@@ -100,6 +97,7 @@ export class SidebarItems extends HTMLElement {
   }
 
   loadMenuSrc(src) {
+    // Not implemented yet.
     return [];
   }
 

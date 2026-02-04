@@ -23,6 +23,8 @@
                 "@Dashboard": "/src/components/dashboard.js", 
                 "@Router": "/src/core/router.js",  
                 "@Utils": "/src/core/utils.js",  
+                "@I18n": "/src/core/i18n.js",  
+                "@Sw": "/src/sw.js",  
                 "@Service/": "/src/service/"  
             }
         }
@@ -42,7 +44,7 @@
 
         <div class="header-center">
             <div class="search-trigger" id="search-open">
-                <span>Search functions ...</span>
+                <span data-i18n="i18n:[search_function_label] ...">search-function</span>
                 <kbd>Ctrl+K</kbd>
             </div>
         </div>
@@ -67,11 +69,11 @@
             <nav class="sidebar-nav">
                 <app-sidebar data-items='[
                 {"label":"Dashboard","icon":"🏠","title":"Dashboard", "action":"menu-show-dashboard", "route":"dashboard"},
-                {"label":"Architecture","icon":"🏗️","title":"Architecture information", "action":"menu-show-architecture", "route":"architecture"},
-                {"label":"Components","icon":"🧩","title":"Components", "action":"menu-show-components", "route":"components"},
-                {"label":"Components in Action","icon":"🚀","title":"Test some components", "action":"menu-show-components-live", "route":"components-live/abcd123"},
-                {"label":"Sourcecode/License","icon":"📜","title":"Sourcecode & License information", "action":"menu-show-sourcecode", "route":"sourcecode"},
-                {"label":"Restrictions","icon":"⚠️","title":"Restrictions", "action":"menu-show-restrictions", "route":"restrictions"}
+                {"label":"i18n:[menu_architecture]","icon":"🏗️","title":"i18n:[menu_architecture_title]", "action":"menu-show-architecture", "route":"architecture"},
+                {"label":"i18n:[menu_components]","icon":"🧩","title":"i18n:[menu_components_title]", "action":"menu-show-components", "route":"components"},
+                {"label":"i18n:[menu_components_in_action]","icon":"🚀","title":"i18n:[menu_components_in_action_title]", "action":"menu-show-components-live", "route":"components-live/abcd123"},
+                {"label":"i18n:[menu_sourcecode]","icon":"📜","title":"i18n:[menu_sourcecode_title]", "action":"menu-show-sourcecode", "route":"sourcecode"},
+                {"label":"i18n:[menu_restrictions]","icon":"⚠️","title":"i18n:[menu_restrictions_title]", "action":"menu-show-restrictions", "route":"restrictions"}
                 ]'></app-sidebar>
             </nav>
             <div class="sidebar-resizer" id="resizer"></div>
@@ -85,27 +87,39 @@
             </section>
 
             <footer class="app-footer">
-                <div>● <span style="color: oklch(70% 0.2 140);">Ready</span></div>
-                <div style="opacity: 0.6;">&copy; Ronald Fuchs | Version: 1.0.0</div>
+                <div>● <span style="color: oklch(70% 0.2 140);" data-i18n="i18n:[ready]">Ready</span></div>
+                <div style="opacity: 0.6;">&copy; Ronald Fuchs | <span data-i18n="i18n:[version]">Version</span>: 1.1.0
+                </div>
             </footer>
         </main>
     </div>
 
     <dialog id="search-overlay" class="search-modal">
         <div class="modal-body">
-            <input type="text" id="search-input" placeholder="Search for functions ..." autofocus>
-            <p>Not implemented in this demo.</p>
-            <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.5;">Press <code>Esc</code> to close</p>
+            <input type="text" id="search-input" placeholder="..." data-i18n-placeholder="i18n:[search_function_label]" autofocus>
+            <p data-i18n="i18n:[not_implemented]!">Not implemented.</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.5;"><span data-i18n="i18n:[press]">Press</span>
+                <code>Esc</code> <span data-i18n="i18n:[to_close]">to close</span></p>
         </div>
     </dialog>
 
     <dialog class="user-modal" id="user-info-dialog">
         <div class="modal-body">
-            <h2>User Information</h2>
+            <h2 data-i18n="i18n:[user_options_title]">User Options</h2>
             <div style="margin: 10px;" id="user-details-content">
-                Not implemented in this demo.
+                <div style="margin-bottom: 25px;">
+                    <div class="user-options-selector">
+                        <span data-i18n="i18n:[user_lang_options_label]">Options</span>
+                        <div class="user-options">
+                            <app-btn action="app-i18n-change-lang" data-lang="en" title="i18n:[change_lang_title]">EN</app-btn>
+                            <span class="separator">|</span>
+                            <app-btn action="app-i18n-change-lang" data-lang="de" title="i18n:[change_lang_title]">DE</app-btn>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <app-btn id="close-modal" action="close-user-information-dialog" title="Close">Close</app-btn>
+            <app-btn id="close-modal" action="close-user-information-dialog" title="i18n:[close_dialog]"
+                data-i18n-d="i18n:[close]">Close!</app-btn>
         </div>
     </dialog>
 
