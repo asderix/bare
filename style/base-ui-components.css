@@ -12,11 +12,11 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    
+
     padding: 0.6rem 1.2rem;
     min-width: 80px;
     border-radius: 8px;
-    
+
     font-family: inherit;
     font-size: 0.9rem;
     font-weight: 500;
@@ -24,11 +24,11 @@
 
     background: oklch(from var(--bg-base) calc(l - 0.04) c h);
     color: var(--text-main);
-    
-    box-shadow: 0 1px 3px oklch(0% 0 0 / 0.1), 
-                0 1px 2px oklch(0% 0 0 / 0.06);
-    
-    transition: 
+
+    box-shadow: 0 1px 3px oklch(0% 0 0 / 0.1),
+        0 1px 2px oklch(0% 0 0 / 0.06);
+
+    transition:
         background-color 0.2s ease,
         box-shadow 0.2s ease,
         transform 0.1s active;
@@ -63,12 +63,28 @@
         background: oklch(from var(--bg-danger) calc(l - 0.15) c h);
         transform: translateY(1px) scale(0.98);
     }
+
+    &.like-text {
+        background: var(--border);
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        gap: 1px;
+        border-radius: 3px;
+        padding: 0.2rem 0.8rem;
+        min-width: 5px;
+    }
+
+    &.like-text:hover {
+        background: oklch(from var(--bg-base) calc(l - 0.08) c h);
+        box-shadow: 0 4px 8px oklch(from var(--bg-base) calc(l - 0.2) c h / 0.4);
+    }    
 }
 
 .btn-default:hover {
     background: oklch(from var(--bg-base) calc(l - 0.07) c h);
-    box-shadow: 0 4px 6px -1px oklch(0% 0 0 / 0.15), 
-                0 2px 4px -1px oklch(0% 0 0 / 0.1);
+    box-shadow: 0 4px 6px -1px oklch(0% 0 0 / 0.15),
+        0 2px 4px -1px oklch(0% 0 0 / 0.1);
 }
 
 .btn-default:focus-visible {
@@ -123,5 +139,7 @@ btn-icon button:disabled {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }

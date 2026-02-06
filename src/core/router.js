@@ -21,7 +21,7 @@ export class Router {
             : {};
 
         const newLang = this.queryParams.ul;
-        
+
         if (newLang == undefined && !isInit) {
             const savedLang = localStorage.getItem('userLang') || userLang;
             document.dispatchEvent(new CustomEvent('app-i18n-change', {
@@ -93,5 +93,14 @@ export class Router {
     navigate(path) {
         const cleanPath = path.startsWith('/') ? path : `/${path}`;
         location.hash = cleanPath;
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            document.dispatchEvent(new CustomEvent('app-action', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                    action: "close-menu-bar"
+                }
+            }));
+        }
     }
 }

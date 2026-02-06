@@ -60,4 +60,5 @@ export class Btn extends HTMLElement {
         }
     }
 }
+
 customElements.define('app-btn', Btn);

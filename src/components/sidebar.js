@@ -1,17 +1,10 @@
 import { i18nParse, isInit } from "@I18n"
 
 let sidebar = null;
-let sidebarTitle = null;
 let resizer = null;
-
-document.addEventListener('app-info-route-change', (e) => {
-  const { title } = e.detail;
-  sidebarTitle.textContent = title;
-});
 
 export function initSidebar() {
   sidebar = document.getElementById('sidebar');
-  sidebarTitle = document.getElementById('sidebar-title');
   resizer = document.getElementById('resizer');
   let isResizing = false;
   resizer.addEventListener('mousedown', (e) => {
@@ -70,6 +63,14 @@ export class SidebarItem extends HTMLElement {
             source: this
           }
         }));
+        this.dispatchEvent(new CustomEvent('app-action-menu-item-selected', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            action: 'menu-item-selected',
+            source: this.querySelector('div')
+          }
+        }));
       }
     };
   }
@@ -87,6 +88,12 @@ export class SidebarItems extends HTMLElement {
     }
 
     document.addEventListener('app-i18n-ready', () => this.render(items));
+    document.addEventListener('app-action-menu-item-selected', (e) => {
+      const { source } = e.detail;
+      document.querySelectorAll('.nav-item').forEach(item =>
+        item.toggleAttribute('activated', item === source)
+      );
+    });
   }
 
   render(items = []) {

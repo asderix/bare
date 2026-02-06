@@ -38,7 +38,10 @@
     <header class="app-header">
         <div class="header-left">
             <app-btn action="toggle-sidebar" variant="icon">☰</app-btn>
-            <div style="font-weight: 800; font-size: 1.2rem; color: var(--accent);">BARE - Bare App Replaces Excess
+            <div class="as-logo-text">
+                <div class="app-logo">
+                    <span class="logo-short">BARE</span><span class="logo-full">&nbsp;- Bare App Replaces Excess</span>
+                </div>
             </div>
         </div>
 
@@ -53,8 +56,7 @@
             <app-btn action="not-implemented-toast" variant="icon" title="User Alerts & Informations">🔔</app-btn>
             <app-btn action="toggle-theme" variant="icon" title="Light-/Dark-Mode">🌓</app-btn>
             <app-btn action="show-user-information-dialog" variant="icon" title="Show the User Information Dialog">
-                <div
-                    style="width: 32px; height: 32px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer;">
+                <div class="as-icon-circle">
                     RF</div>
             </app-btn>
         </div>
@@ -63,8 +65,7 @@
     <div class="app-container">
         <aside class="app-sidebar" id="sidebar" data-state="expanded">
             <div class="sidebar-header">
-                <span class="sidebar-title">👉 </span>
-                <span class="sidebar-title" id="sidebar-title">Welcome!</span>
+                <!-- Give a header if needed -->
             </div>
             <nav class="sidebar-nav">
                 <app-sidebar data-items='[
@@ -96,10 +97,17 @@
 
     <dialog id="search-overlay" class="search-modal">
         <div class="modal-body">
-            <input type="text" id="search-input" placeholder="..." data-i18n-placeholder="i18n:[search_function_label]" autofocus>
+            <input type="text" id="search-input" placeholder="..." data-i18n-placeholder="i18n:[search_function_label]"
+                autofocus>
             <p data-i18n="i18n:[not_implemented]!">Not implemented.</p>
-            <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.5;"><span data-i18n="i18n:[press]">Press</span>
-                <code>Esc</code> <span data-i18n="i18n:[to_close]">to close</span></p>
+            <div class="as-flex like-row-center">
+                <p class="as-usability-hint">
+                    <span data-i18n="i18n:[press]">Press</span>
+                    <code>Esc</code>
+                    <span data-i18n="i18n:[to_close]:">to close or click here</span>
+                </p>
+                <app-btn variant="text" action="close-search-overlay">✖</app-btn>
+            </div>
         </div>
     </dialog>
 
@@ -111,9 +119,11 @@
                     <div class="user-options-selector">
                         <span data-i18n="i18n:[user_lang_options_label]">Options</span>
                         <div class="user-options">
-                            <app-btn action="app-i18n-change-lang" data-lang="en" title="i18n:[change_lang_title]">EN</app-btn>
+                            <app-btn action="app-i18n-change-lang" data-lang="en"
+                                title="i18n:[change_lang_title]">EN</app-btn>
                             <span class="separator">|</span>
-                            <app-btn action="app-i18n-change-lang" data-lang="de" title="i18n:[change_lang_title]">DE</app-btn>
+                            <app-btn action="app-i18n-change-lang" data-lang="de"
+                                title="i18n:[change_lang_title]">DE</app-btn>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 @import "./editable-table-ui-component.css";
 
 /* ================================
-   GLOBAL COLOR SYSTEM (OKLCH) 
+    GLOBAL COLOR SYSTEM (OKLCH) 
 ================================ */
 :root[data-theme="light"] {
     --bg-base: oklch(98% 0.01 250);
@@ -32,7 +32,7 @@
 }
 
 /* ================================
-   RESET/SET
+    RESET/SET
 ================================ */
 * {
     box-sizing: border-box;
@@ -45,29 +45,25 @@ body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: var(--bg-base);
     color: var(--text-main);
-
     height: 100svh;
     overflow: hidden;
-
     display: flex;
     flex-direction: column;
 }
 
 /* ================================
-   HEADER
+    HEADER
 ================================ */
 .app-header {
     height: var(--header-h);
     flex-shrink: 0;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 1.5rem;
     background: var(--bg-surface);
     border-bottom: 1px solid var(--border);
-    z-index: 10;
+    z-index: 100;
 }
 
 .header-left,
@@ -77,47 +73,97 @@ body {
     gap: 1rem;
 }
 
+.app-logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent);
+    white-space: nowrap;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .logo-full {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .logo-full {
+        display: inline;
+    }
+}
+
 .search-trigger {
     background: var(--bg-base);
     border: 1px solid var(--border);
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
-    width: clamp(200px, 30vw, 500px);
+    width: min(clamp(200px, 30vw, 500px), 80vw);
     color: var(--text-main);
     cursor: pointer;
-
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
     transition: border-color 0.2s;
 }
 
-.search-trigger:hover {
-    border-color: var(--accent);
+kbd {
+    background: var(--border);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+
+    .search-trigger span,
+    .search-trigger kbd {
+        display: none;
+    }
+
+    .search-trigger {
+        width: auto;
+        min-width: 44px;
+    }
 }
 
 /* ================================
-   APP CONTAINER
+    APP CONTAINER
 ================================ */
 .app-container {
     flex: 1;
     display: flex;
     min-height: 0;
+    position: relative;
 }
 
 /* ================================
-   SIDEBAR
-================================ */
+    SIDEBAR
+=============================== */
 .app-sidebar {
     width: var(--sidebar-w);
     background: var(--bg-surface);
     border-right: 1px solid var(--border);
-
     display: flex;
     flex-direction: column;
     position: relative;
+    z-index: 150;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease;
+}
 
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@media (max-width: 768px) {
+    .app-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .app-sidebar[data-state="hidden"],
+    .app-sidebar[data-state="rail"] {
+        transform: translateX(-100%);
+    }
 }
 
 .app-sidebar[data-state="rail"] {
@@ -161,28 +207,29 @@ body {
 }
 
 /* ================================
-   MAIN AREA
+    MAIN AREA & SCROLL CONTENT
 ================================ */
 .app-main {
     flex: 1;
     display: flex;
     flex-direction: column;
-
     min-width: 0;
     min-height: 0;
 }
 
-/* ================================
-   SCROLL CONTENT
-================================ */
 .scroll-content {
     flex: 1;
     overflow-y: auto;
     padding: 2rem;
     background: var(--bg-base);
-
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
+}
+
+@media (max-width: 768px) {
+    .scroll-content {
+        padding: 1rem;
+    }
 }
 
 /* ================================
@@ -191,14 +238,11 @@ body {
 .app-footer {
     height: 36px;
     flex-shrink: 0;
-
     background: var(--bg-surface);
     border-top: 1px solid var(--border);
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 1.5rem;
     font-size: 0.75rem;
     font-weight: 500;
@@ -213,14 +257,10 @@ body {
     gap: 1.2rem;
     padding: 0.8rem 1.2rem;
     cursor: pointer;
-
     border-radius: 0 24px 24px 0;
     margin-right: 0.5rem;
-
     transition: background 0.2s;
-
     user-select: none;
-    -webkit-user-select: none;
 }
 
 .nav-item:hover {
@@ -235,18 +275,24 @@ body {
     text-align: center;
 }
 
+.nav-item[activated] {
+    background: var(--bg-base);
+    font-weight: bold;
+}
+
 /* ================================
-   SEARCH-DIALOG
+    SEARCH-DIALOG
 ================================ */
 .search-modal {
     margin: 15vh auto;
     border: none;
     border-radius: 12px;
     padding: 0;
-
     background: var(--bg-surface);
     color: var(--text-main);
-    width: 600px;
+
+    width: 90vw;
+    max-width: 600px;
 
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
 }
@@ -271,37 +317,29 @@ body {
     font-size: 1.1rem;
 }
 
-kbd {
-    background: var(--border);
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-}
-
 /* ================================
     USER-INFO DIALOG
 ================================ */
-
 .user-modal {
     border: none;
     border-radius: 12px;
     padding: 0;
     background: var(--bg-surface);
     color: var(--text-main);
-    
-    width: 90vw; 
-    height: 90vh; 
-    margin: auto; 
-    
+
+    width: 95vw;
+    height: 90vh;
     max-width: 1100px;
     max-height: 800px;
 
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    
+    margin: auto;
+
     opacity: 0;
     pointer-events: none;
+    display: none;
     transition: opacity 0.2s ease;
 }
+
 .user-modal[open] {
     opacity: 1;
     pointer-events: all;
@@ -309,11 +347,19 @@ kbd {
     flex-direction: column;
 }
 
+@media (max-width: 768px) {
+    .user-modal {
+        width: 100vw;
+        height: 100svh;
+        border-radius: 0;
+        max-height: none;
+    }
+}
+
 .user-modal::backdrop {
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
     opacity: 0;
-    transition: opacity 0.2s ease;
 }
 
 .user-modal[open]::backdrop {
@@ -323,7 +369,6 @@ kbd {
 /* ================================
     MODAL DIALOG INSIDE
 ================================ */
-
 .modal-header {
     padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--border);
@@ -338,12 +383,43 @@ kbd {
     flex-grow: 1;
 }
 
-.modal-footer {
-    padding: 1.5rem 2rem;
-    border-top: 1px solid var(--border);
+/* ================================
+    DEFAULT CONTAINERS
+================================ */
+.as-flex {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+
+    &.like-row-center {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+}
+
+.as-logo-text {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent);
+}
+
+.as-icon-circle {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.as-usability-hint {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.5;
 }
 
 /* ================================
@@ -353,7 +429,6 @@ kbd {
    Didn't want a css file for each
    demo component.
 ================================ */
-
 .contenthead {
     min-height: 30px;
     margin-bottom: 15px;

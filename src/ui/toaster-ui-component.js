@@ -21,4 +21,5 @@ export class Toaster extends HTMLElement {
         }, 3000);
     }
 }
+
 customElements.define('app-toaster', Toaster);

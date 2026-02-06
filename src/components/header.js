@@ -28,9 +28,14 @@ document.addEventListener('app-action', (e) => {
             const dialogClose = document.querySelector('.user-modal');
             dialogClose.close();
             break;
+        case 'close-menu-bar':
+            sidebar.setAttribute('data-state', sidebarStates[2]);
+            localStorage.setItem('sidebarState', sidebarStates[2]);
+        case 'close-search-overlay':
+            searchModal = document.getElementById('search-overlay');
+            searchModal.close();
 
         default:
-
     }
 });
 
