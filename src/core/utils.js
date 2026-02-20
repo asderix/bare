@@ -2,7 +2,7 @@ export const sanitize = (str) => {
     const temp = document.createElement('div');
     temp.textContent = str;
     return temp.innerHTML;
-};
+}
 
 export const di = (str) => {
     const detail = {
@@ -18,3 +18,19 @@ export const di = (str) => {
 
     return detail.serviceObj;
 }
+
+export const createProxy = (target) => {
+    const listeners = [];
+
+    const proxy = new Proxy(target, {
+        set(obj, prop, value) {
+            const result = Reflect.set(obj, prop, value);
+            listeners.forEach(fn => fn(prop, value));
+            return result;
+        }
+    });
+
+    proxy.subscribe = (fn) => listeners.push(fn);
+
+    return proxy; 
+};

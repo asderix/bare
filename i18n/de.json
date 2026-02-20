@@ -35,5 +35,6 @@
   "not_implemented": "In dieser Demo nicht implementiert",
   "exp_user_change": "Der Benutzer hat den Wert geändert am",
   "exp_user_was": "das war",
-  "exp_user_costs": "und kostete"
+  "exp_user_costs": "und kostete",
+  "proxy_example_input": "Tippe hier, um die reaktive Proxy-Demo zu sehen."
 }

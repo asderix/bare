@@ -24,6 +24,8 @@ export class AppComponents extends HTMLElement {
     <p>Router, components (encapsulation and reuse), parent-child stuff: parent passes data to child, child passes data (or events, etc.) to parent. Services (singleton), dependency injection, Rest API calls, and sanitizer. Then the challenge of rendering as little as possible. Example table: If one row is changed, the entire table should not be re-rendered. Firstly, this is slow and secondly, it has unpleasant side effects. Furthermore keeping the state of a component. This means the following: The user switches components, e.g., from "Components in action" to "Dashboard" and then clicks back to "Components in action".
  Technically, the component is recreated (new JavaScript object). However, you may want to restore the data that has been entered but not yet saved, or a selection, etc., so that it appears to the user as if it had existed. To do this, we store the status in a service that remains in place. The component accesses the data from the service, which determines when data needs to be reloaded.</p>
     <p>&nbsp;</p>
+    <p>A simple proxy shows how to implement reactive behavior in a clean, separate, yet simple way. The user types and the text in the span is adjusted in real time. Without the input field or its logic knowing anything about it.</p>
+    <p>&nbsp;</p>
     <p>Furthermore, BARE implements HTML dialogs and uses the integrated modal function for these.</p>
     `;
   }
