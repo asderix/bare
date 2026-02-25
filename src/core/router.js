@@ -44,7 +44,7 @@ export class Router {
         this.params = {};
 
         for (const path in this.routes) {
-            // Regex für Pfad-Variablen (:id)
+            // Regex for path variables (:id)
             const pattern = new RegExp('^' + path.replace(/:[^\s/]+/g, '([^/]+)') + '$');
             const match = pathOnly.match(pattern);
 
